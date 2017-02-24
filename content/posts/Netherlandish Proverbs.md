@@ -1,5 +1,5 @@
 ---
-file: Pieter_Brueghel_the_Elder_-_The_Dutch_Proverbs_-_Google_Art_Project.jpg
+image: Pieter_Brueghel_the_Elder_-_The_Dutch_Proverbs_-_Google_Art_Project.jpg
 date: 1559-05-19
 artist: Pieter Bruegel the Elder
 medium: Oil-on-panel

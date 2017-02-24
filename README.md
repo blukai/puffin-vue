@@ -1,5 +1,3 @@
-# Content
-
 ### The structure of content
 ```bash
 └── content

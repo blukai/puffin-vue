@@ -1,5 +1,5 @@
 ---
-file: Yayoi_Kusama_Infinity_Room.jpg
+image: Yayoi_Kusama_Infinity_Room.jpg
 date: 2016-10-18
 ---
 

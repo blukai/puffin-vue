@@ -1,5 +1,5 @@
 ---
-file: Edouard_Manet_-_The_Balcony_-_Google_Art_Project.jpg
+image: Edouard_Manet_-_The_Balcony_-_Google_Art_Project.jpg
 date: 1868-05-25
 artist:	Édouard Manet
 medium:	Oil on canvas

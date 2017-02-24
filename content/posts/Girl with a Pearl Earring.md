@@ -1,5 +1,5 @@
 ---
-file: Meisje_met_de_parel.jpg
+image: Meisje_met_de_parel.jpg
 date: 1665-05-15
 artist: Johannes Vermeer
 type: Tronie
