@@ -1,0 +1,27 @@
+:root {
+  --fontFamily:
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    "Droid Sans",
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+
+  /* font size */
+  --fontSizeSmall: 12px;
+  --fontSizeNormal: 14px;
+  --fontSizeMedium: 16px;
+
+  /* font weight */
+  --fontWeightLight: 300;
+  --fontWeightNormal: 400;
+  --fontWeightMedium: 500;
+}
