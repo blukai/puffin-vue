@@ -1,5 +1,5 @@
 <template>
   <div>
-    header
+    four-oh-four
   </div>
 </template>

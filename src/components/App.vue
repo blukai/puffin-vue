@@ -60,11 +60,15 @@
 
 <template>
   <div id="app">
-    <AppHeader />
+    <header>
+      <AppHeader />
+    </header>
     <main>
-      Hey!
+      <router-view />
     </main>
-    <AppFooter />
+    <footer>
+      <AppFooter />
+    </footer>
   </div>
 </template>
 

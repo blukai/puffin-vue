@@ -13,7 +13,8 @@
   "dependencies": {
     "postcss-cssnext": "^2.9.0",
     "postcss-import": "^9.1.0",
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vue-router": "^2.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
