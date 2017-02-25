@@ -21,10 +21,8 @@ li {
 </style>
 
 <template>
-  <li>
-    <Loading v-if="data.loading" />
-    <Error v-else-if="data.error" />
-    <router-link v-else :to="`view/${post.link}`">
+  <li v-if="!data.loading && !data.error && data">
+    <router-link :to="post.link">
       <img :src="image">
       <p>{{ post.title }}</p>
     </router-link>
@@ -34,8 +32,7 @@ li {
 <script>
 import { mapGetters } from 'vuex';
 
-import { objectize } from 'utility';
-import { github } from '../../../config.json';
+import { getImgUrl } from 'utility';
 
 export default {
   props: {
@@ -51,15 +48,15 @@ export default {
     data() {
       const item = this.raw[this.post.file];
 
-      if (!item.loading && !item.error && item.data && item.data.length > 0) {
-        return objectize(item.data);
+      if (!item.loading && !item.error && item.metadata) {
+        return item.metadata;
       }
 
       return item;
     },
 
     image() {
-      return `//raw.githubusercontent.com/${github.user}/${github.repo}/content/content/images/${this.data.image}`;
+      return getImgUrl(this.data.image);
     }
   },
 

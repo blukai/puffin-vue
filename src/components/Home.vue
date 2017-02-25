@@ -12,11 +12,14 @@ ul {
 
 <template>
   <div>
-    <Loading v-if="posts.loading" />
-    <Error v-else-if="posts.error" />
-    <ul v-else>
-      <Card v-for="post in posts" :post="post" />
-    </ul>
+    <div v-show="!route">
+      <Loading v-if="posts.loading" />
+      <Error v-else-if="posts.error" />
+      <ul v-else>
+        <Card v-for="post in posts" :post="post" />
+      </ul>
+    </div>
+    <Preview v-if="view" :post="view" />
   </div>
 </template>
 
@@ -24,14 +27,43 @@ ul {
 import { mapGetters } from 'vuex';
 
 import Card from 'components/Post/card';
+import Preview from 'components/Post/preview';
 
 export default {
   components: {
-    Card
+    Card,
+    Preview
   },
 
   computed: {
-    ...mapGetters(['posts'])
+    ...mapGetters(['posts', 'raw']),
+
+    route() {
+      return this.$route.params.view;
+    },
+
+    view() {
+      if (this.route) {
+        const posts = this.posts;
+
+        if (!posts.loading && !posts.error && posts.length) {
+          const viewing = this.posts.find(post => post.link === this.route);
+
+          if (viewing) {
+            const raw = this.raw[viewing.file] && this.raw[viewing.file].metadata;
+
+            if (raw) {
+              return {
+                ...viewing,
+                raw
+              };
+            }
+          }
+        }
+      }
+
+      return null;
+    }
   },
 
   methods: {

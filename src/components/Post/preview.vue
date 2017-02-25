@@ -1,15 +1,25 @@
 <template>
   <div>
-    <br>
-    <br>
-    {{ $store.state.posts }}
-    <br>
-    <br>
-    <br>
-    {{ $store.state.raw }}
+    <img :src="image">
+    {{ post }}
   </div>
 </template>
 
 <script>
-export default {};
+import { getImgUrl } from 'utility';
+
+export default {
+  props: {
+    post: {
+      type: Object,
+      required: true
+    }
+  },
+
+  computed: {
+    image() {
+      return getImgUrl(this.post.raw.image);
+    }
+  }
+};
 </script>

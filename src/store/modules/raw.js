@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import { getRaw as raw } from 'api';
+import { objectize } from 'utility';
 
 const initialState = {
   raw: {}
@@ -33,7 +34,7 @@ const mutations = {
     Vue.set(state.raw, url, {
       loading: false,
       error: false,
-      data: text
+      metadata: objectize(text)
     });
   }
 };
