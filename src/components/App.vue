@@ -39,8 +39,8 @@
     & > main {
       flex-grow: 1;
       order: 2;
-      padding-top: 20px;
-      padding-bottom: 20px;
+      padding-top: var(--indent);
+      padding-bottom: var(--indent);
     }
 
     & > footer {

@@ -1,11 +1,33 @@
+<style scoped>
+@import 'props';
+
+li {
+  list-style: none;
+  display: inline-block;
+  margin-bottom: 20px;
+
+  & img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  & p {
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+</style>
+
 <template>
   <li>
     <Loading v-if="data.loading" />
     <Error v-else-if="data.error" />
-    <div v-else>
-      {{ post.title }}
-      {{ data }}
-    </div>
+    <router-link v-else :to="`view/${post.link}`">
+      <img :src="image">
+      <p>{{ post.title }}</p>
+    </router-link>
   </li>
 </template>
 
@@ -13,6 +35,7 @@
 import { mapGetters } from 'vuex';
 
 import { objectize } from 'utility';
+import { github } from '../../../config.json';
 
 export default {
   props: {
@@ -33,6 +56,10 @@ export default {
       }
 
       return item;
+    },
+
+    image() {
+      return `//raw.githubusercontent.com/${github.user}/${github.repo}/content/content/images/${this.data.image}`;
     }
   },
 
@@ -43,7 +70,9 @@ export default {
   },
 
   created() {
-    this.getRaw();
+    if (!this.raw[this.post.file]) {
+      this.getRaw();
+    }
   }
 };
 </script>

@@ -1,14 +1,12 @@
 <style scoped>
+@import 'props';
+
 ul {
   margin: 0;
   padding: 0;
+  line-height: 0;
   column-count: 3;
-  column-gap: 20px;
-
-  & li {
-    list-style: none;
-    margin-bottom: 20px;
-  }
+  column-gap: var(--indent);
 }
 </style>
 
@@ -43,7 +41,10 @@ export default {
   },
 
   created() {
-    this.getPosts();
+    const posts = this.posts;
+    if (!posts.loading && !posts.error && !posts.length) {
+      this.getPosts();
+    }
   }
 };
 </script>
