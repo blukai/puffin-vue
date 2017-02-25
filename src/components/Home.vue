@@ -2,23 +2,20 @@
 ul {
   margin: 0;
   padding: 0;
+  column-count: 3;
+  column-gap: 20px;
 
   & li {
     list-style: none;
-    /*float: left;
-    margin: 10px;
-
-    &:nth-child(4n+1) {
-      clear: left;
-    }*/
+    margin-bottom: 20px;
   }
 }
 </style>
 
 <template>
   <div>
-    <p v-if="posts.loading">Loading...</p>
-    <p v-else-if="posts.error">Whoops, something went wrong</p>
+    <Loading v-if="posts.loading" />
+    <Error v-else-if="posts.error" />
     <ul v-else>
       <Card v-for="post in posts" :post="post" />
     </ul>

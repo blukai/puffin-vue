@@ -1,0 +1,34 @@
+import { mdMetadata } from 'utility';
+
+function trim(str) {
+  return str.replace(/^\s+|\s+$/g, '');
+}
+
+function nonEmpty(str) {
+  return str != null && str.length > 0;
+}
+
+function splitKeyValue(row) {
+  const tokens = row.split(':').map(trim);
+
+  if (tokens.length > 2) {
+    throw new Error(`Malformed row: ${row}`);
+  }
+
+  return tokens;
+}
+
+function merge(acc, item) {
+  /* eslint-disable no-param-reassign */
+  // Normalise key to lower case, to guarantee spelling
+  acc[item[0].toLowerCase()] = item[1];
+
+  return acc;
+}
+
+export default payload => mdMetadata
+  .exec(payload)[1]
+  .split('\n')
+  .filter(nonEmpty)
+  .map(splitKeyValue)
+  .reduce(merge, {});
