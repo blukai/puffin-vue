@@ -2,13 +2,13 @@ import fetch from 'isomorphic-fetch';
 
 import { github } from '../../config.json';
 
-const { user, repo, branch } = github;
-const url = dir => `//api.github.com/repos/${user}/${repo}/contents/content/${dir}?ref=${branch}`;
+const { user, repo } = github;
+const getUrl = dir => `//api.github.com/repos/${user}/${repo}/contents/content/${dir}?ref=content`;
 
 export const getPostList = (commit) => {
   commit('POSTLIST_LOADING');
 
-  fetch(url('posts'))
+  fetch(getUrl('posts'))
     .then((res) => {
       if (res.status >= 400) {
         throw commit('POSTLIST_ERROR');
@@ -18,15 +18,15 @@ export const getPostList = (commit) => {
     }).then(json => commit('POSTLIST_OK', { json }));
 };
 
-export const getPages = (commit) => {
-  commit('PAGES_LOADING');
+export const getRaw = (commit, url) => {
+  commit('RAW_LOADING', { url });
 
-  fetch(url('pages'))
+  fetch(url)
     .then((res) => {
       if (res.status >= 400) {
-        throw commit('PAGES_ERROR');
+        commit('RAW_ERROR', { url });
       }
 
-      return res.json();
-    }).then(json => commit('PAGES_OK', { json }));
+      return res.text();
+    }).then(text => commit('RAW_OK', { url, text }));
 };

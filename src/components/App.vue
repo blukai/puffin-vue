@@ -54,6 +54,11 @@
         @apply --appContainer;
       }
     }
+
+    & > header,
+    & > footer {
+      height: 65px;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 import { getPostList as posts } from 'api';
-import { md } from 'utility';
+import { md, clean } from 'utility';
 
 const initialState = {
   posts: {
@@ -45,10 +45,12 @@ const getters = {
   posts(state) {
     const p = state.posts;
 
+    // Transformations
     if (!p.loading && !p.error && p.data.length > 0) {
       return p.data.filter(item => md.test(item.name)).map(item => ({
         title: item.name.replace(md, ''),
-        url: item.download_url
+        file: item.download_url,
+        link: clean(item.name.replace(md, ''))
       }));
     }
 
