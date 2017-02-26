@@ -8,7 +8,7 @@ article {
 
   & img {
     @apply --centering;
-    
+
     display: block;
     margin-bottom: var(--indent);
   }
@@ -21,20 +21,20 @@ article {
       list-style: none;
       display: inline-block;
       padding: var(--indent);
-        padding-bottom: 0;
+      padding-bottom: 0;
 
       &:last-child {
         padding-right: 0;
       }
 
       &:first-child {
-        padding-left: 0; 
+        padding-left: 0;
       }
 
       & span:first-child {
         font-weight: var(--fontWeightLight);
         font-size: var(--fontSizeSmall);
-        display: block
+        display: block;
       }
     }
   }
@@ -47,7 +47,7 @@ article {
   & > h1 {
     font-size: calc(var(--fontSizeHuge) - 10px);
     font-weight: var(--fontWeightNormal);
-    margin: 0;;
+    margin: 0;
     line-height: 1.2;
   }
 }
@@ -82,11 +82,7 @@ export default {
 
   computed: {
     imageUrl() {
-      const raw = this.raw;
-
-      if (raw.image) {
-        return getImgUrl(raw.image);
-      }
+      return getImgUrl(this.raw.image);
     },
 
     headerHeight() {

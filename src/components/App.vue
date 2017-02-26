@@ -53,7 +53,7 @@
     & > main {
       flex-grow: 1;
       order: 2;
-      
+
       & > div {
         @apply --appContainer;
       }

@@ -17,7 +17,7 @@ li {
     font-weight: var(--fontWeightMedium);
     font-size: var(--fontSizeLarge);
     line-height: var(--lineHeight);
-    
+
     & span {
       color: var(--textColorPrimary);
       padding: 0 5px;

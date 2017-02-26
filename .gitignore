@@ -1,6 +1,8 @@
 node_modules/
-dist/
+build/
 content/
+
+404.html
 
 .DS_Store
 *.log*

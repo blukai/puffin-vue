@@ -10,9 +10,9 @@ function resolve(dir) {
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: resolve('build'),
+    publicPath: '/build/',
+    filename: 'bundle.js'
   },
   resolve: {
     extensions: [
