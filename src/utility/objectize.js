@@ -26,9 +26,13 @@ function merge(acc, item) {
   return acc;
 }
 
-export default payload => mdMetadata
-  .exec(payload)[1]
-  .split('\n')
-  .filter(nonEmpty)
-  .map(splitKeyValue)
-  .reduce(merge, {});
+export default (payload) => {
+  const text = payload.replace(mdMetadata, '');
+
+  return mdMetadata
+    .exec(payload)[1]
+    .split('\n')
+    .filter(nonEmpty)
+    .map(splitKeyValue)
+    .reduce(merge, text.length > 1 ? { text } : {});
+};

@@ -12,14 +12,14 @@ ul {
 
 <template>
   <section>
-    <div v-show="!route">
+    <div v-show="!view">
       <Loading v-if="posts.loading" />
       <Error v-else-if="posts.error" />
       <ul v-else>
         <Card v-for="post in posts" :post="post" />
       </ul>
     </div>
-    <Preview v-if="view" :post="view" />
+    <Preview v-if="view" :raw="view" />
   </section>
 </template>
 
@@ -38,26 +38,22 @@ export default {
   computed: {
     ...mapGetters(['posts', 'raw']),
 
-    route() {
-      return this.$route.params.view;
-    },
-
     view() {
-      if (this.route) {
+      const route = this.$route.params.view;
+
+      if (route) {
         const posts = this.posts;
 
         if (!posts.loading && !posts.error && posts.length) {
-          const viewing = this.posts.find(post => post.link === this.route);
+          const viewing = this.posts.find(post => post.link === route);
 
           if (viewing) {
-            const raw = this.raw[viewing.file] && this.raw[viewing.file].metadata;
+            const metadata = this.raw[viewing.file] && this.raw[viewing.file].metadata;
 
-            if (raw) {
-              return {
-                ...viewing,
-                raw
-              };
-            }
+            return {
+              ...metadata,
+              title: viewing.title
+            };
           }
         }
       }

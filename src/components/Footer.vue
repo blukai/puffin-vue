@@ -10,6 +10,7 @@ footer > section {
   align-items: center;
   color: var(--textColorSecondary);
   font-size: var(--fontSizeSmall);
+  font-weight: var(--fontWeightLight);
 }
 </style>
 

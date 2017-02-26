@@ -18,7 +18,7 @@ header > section {
     & > a {
       @apply --transitionOpacity;
 
-      font-size: 52px;
+      font-size: var(--fontSizeHuge);
       color: var(--textColorPrimary);
 
       &:hover {

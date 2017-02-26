@@ -47,14 +47,13 @@
 
     & > header {
       order: 1;
+      padding-bottom: var(--indent);
     }
 
     & > main {
       flex-grow: 1;
       order: 2;
-      padding-top: var(--indent);
-      padding-bottom: var(--indent);
-
+      
       & > div {
         @apply --appContainer;
       }
@@ -62,6 +61,7 @@
 
     & > footer {
       order: 3;
+      padding-top: calc(var(--indent) * 2);
     }
 
     & > header,
