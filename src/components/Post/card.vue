@@ -1,10 +1,12 @@
 <style scoped>
 @import 'props';
+@import 'colors';
+@import 'typography';
 
 li {
   list-style: none;
   display: inline-block;
-  margin-bottom: 20px;
+  text-align: center;
 
   & img {
     max-width: 100%;
@@ -12,10 +14,27 @@ li {
   }
 
   & p {
-    text-align: center;
-    line-height: 1.5;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-weight: var(--fontWeightMedium);
+    font-size: var(--fontSizeLarge);
+    line-height: var(--lineHeight);
+    
+    & span {
+      color: var(--textColorPrimary);
+      padding: 0 5px;
+      box-shadow: inset 0 -7px 0 yellow;
+    }
+  }
+
+  & a {
+    display: block;
+
+    &:hover {
+      border: none;
+
+      & span {
+        background-color: yellow;
+      }
+    }
   }
 }
 </style>
@@ -24,7 +43,7 @@ li {
   <li v-if="!data.loading && !data.error && data">
     <router-link :to="post.link">
       <img :src="image">
-      <p>{{ post.title }}</p>
+      <p><span>{{ post.title }}</span></p>
     </router-link>
   </li>
 </template>

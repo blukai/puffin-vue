@@ -14,7 +14,11 @@
     padding-right: var(--indent);
   };
 
-  --transition: {
+  --transitionOpacity: {
     transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  };
+
+  --transitionBackground: {
+    transition: background 0.15s cubic-bezier(0.33, 0.66, 0.66, 1);
   };
 }

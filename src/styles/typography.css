@@ -14,11 +14,13 @@
     "Apple Color Emoji",
     "Segoe UI Emoji",
     "Segoe UI Symbol";
+  --lineHeight: 1.55;
 
   /* font size */
   --fontSizeSmall: 12px;
   --fontSizeNormal: 14px;
   --fontSizeMedium: 16px;
+  --fontSizeLarge: 19px;
 
   /* font weight */
   --fontWeightLight: 300;

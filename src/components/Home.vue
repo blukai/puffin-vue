@@ -6,12 +6,12 @@ ul {
   padding: 0;
   line-height: 0;
   column-count: 3;
-  column-gap: var(--indent);
+  column-gap: calc(var(--indent) * 1.5);
 }
 </style>
 
 <template>
-  <div>
+  <section>
     <div v-show="!route">
       <Loading v-if="posts.loading" />
       <Error v-else-if="posts.error" />
@@ -20,7 +20,7 @@ ul {
       </ul>
     </div>
     <Preview v-if="view" :post="view" />
-  </div>
+  </section>
 </template>
 
 <script>

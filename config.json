@@ -2,5 +2,7 @@
   "github": {
     "user": "blukai",
     "repo": "puffin"
-  }
+  },
+  "author": "Someone",
+  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 }

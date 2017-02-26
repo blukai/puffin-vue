@@ -22,7 +22,20 @@
     font-weight: var(--fontWeigthNormal);
     color: var(--textColorPrimary);
     background-color: var(--background);
-    line-height: 1.55;
+    line-height: var(--lineHeight);
+  }
+
+  & a {
+    color: var(--linkColor);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--linkColorHov);
+    }
+
+    & * {
+      @apply --transitionBackground;
+    }
   }
 
   & #app {
@@ -41,6 +54,10 @@
       order: 2;
       padding-top: var(--indent);
       padding-bottom: var(--indent);
+
+      & > div {
+        @apply --appContainer;
+      }
     }
 
     & > footer {
@@ -50,14 +67,9 @@
     & > header,
     & > main,
     & > footer {
-      & > div {
+      & > section {
         @apply --appContainer;
       }
-    }
-
-    & > header,
-    & > footer {
-      height: 65px;
     }
   }
 }
@@ -65,15 +77,11 @@
 
 <template>
   <div id="app">
-    <header>
-      <AppHeader />
-    </header>
+    <AppHeader />
     <main>
       <router-view />
     </main>
-    <footer>
-      <AppFooter />
-    </footer>
+    <AppFooter />
   </div>
 </template>
 

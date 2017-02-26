@@ -1,7 +1,11 @@
 :root {
-  --background: black;
+  --background: white;
 
   /* text */
-  --textColorPrimary: #ccc;
-  --textColorSecondary: #999;
+  --textColorPrimary: black;
+  --textColorSecondary: color(var(--textColorPrimary) a(70%));
+
+  /* links */
+  --linkColor: blue;
+  --linkColorHov: var(--textColorPrimary);
 }
