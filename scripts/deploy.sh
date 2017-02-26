@@ -11,11 +11,10 @@ git config --global user.email "travis@travis-ci.org"
 
 git clone --branch gh-pages $REPO deploy
 
-cd deploy
-find . -path ./.git -prune -o -exec rm -rf {} \; 2> /dev/null
-cd ..
-
 cp index.html 404.html
+
+rm -rf deploy/index.html deploy/404.html deploy/build
+
 mv -v build index.html 404.html deploy
 
 cd deploy
