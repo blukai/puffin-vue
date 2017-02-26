@@ -1,5 +1,12 @@
 :root {
+  /* breakpoints */
+  @custom-media --medium-x (max-width: 724px);
+  @custom-media --small-x (max-width: 564px);
+  @custom-media --tiny-x (max-width: 400px);
+
   --indent: 20px;
+  --indentMedium: 10px;
+  --indentSmall: 5px;
 
   --centering: {
     margin-left: auto;
@@ -12,6 +19,16 @@
     max-width: 980px;
     padding-left: var(--indent);
     padding-right: var(--indent);
+
+    @media (--medium-x) {
+      padding-left: var(--indentMedium);
+      padding-right: var(--indentMedium);
+    }
+
+    @media (--small-x) {
+      padding-left: var(--indentSmall);
+      padding-right: var(--indentSmall);
+    }
   };
 
   --transitionOpacity: {

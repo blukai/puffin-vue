@@ -36,6 +36,18 @@ li {
       }
     }
   }
+
+  @media (--medium-x) {
+    & p {
+      font-size: var(--fontSizeMedium);
+    }
+  }
+
+  @media (--medium-x) {
+    & p {
+      font-size: var(--fontSizeNormal);
+    }
+  }
 }
 </style>
 

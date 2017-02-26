@@ -11,6 +11,7 @@ article {
 
     display: block;
     margin-bottom: var(--indent);
+    max-width: calc(100vw - 10px);
   }
 
   & > ul {

@@ -24,6 +24,14 @@ header > section {
       &:hover {
         opacity: 0.7;
       }
+
+      @media (--small-x) {
+        font-size: calc(var(--fontSizeHuge) / 1.4);
+      }
+
+      @media (--tiny-x) {
+        font-size: calc(var(--fontSizeHuge) / 1.8);
+      }
     }
 
     & > span {

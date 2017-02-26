@@ -7,6 +7,14 @@ ul {
   line-height: 0;
   column-count: 3;
   column-gap: calc(var(--indent) * 1.5);
+
+  @media (--medium-x) {
+    column-gap: var(--indent);
+  }
+
+  @media (--small-x) {
+    column-gap: var(--indentMedium);
+  }
 }
 </style>
 
