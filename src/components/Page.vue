@@ -13,15 +13,13 @@
 import { mapGetters } from 'vuex';
 import marked from 'marked';
 
-import { getImgUrl } from 'utility';
-
 export default {
   computed: {
     ...mapGetters(['pages', 'raw']),
 
     pageFile() {
       const route = this.$route.params.page;
-      
+
       if (route) {
         const pages = this.pages;
 

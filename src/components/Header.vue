@@ -88,7 +88,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['pages']),
+    ...mapGetters(['pages'])
   },
 
   methods: {
