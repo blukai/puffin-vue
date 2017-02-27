@@ -1,5 +1,6 @@
 :root {
   --background: white;
+  --backgroundInv: color(var(--background) lightness(-100%));
 
   /* text */
   --textColorPrimary: black;

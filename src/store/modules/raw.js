@@ -34,7 +34,7 @@ const mutations = {
     Vue.set(state.raw, url, {
       loading: false,
       error: false,
-      metadata: objectize(text)
+      data: objectize(text)
     });
   }
 };

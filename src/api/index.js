@@ -15,7 +15,8 @@ export const getPostList = (commit) => {
       }
 
       return res.json();
-    }).then(json => commit('POSTLIST_OK', { json }));
+    }).then(json => commit('POSTLIST_OK', { json }))
+    .catch(() => commit('POSTLIST_ERROR'));
 };
 
 export const getRaw = (commit, url) => {
@@ -28,5 +29,20 @@ export const getRaw = (commit, url) => {
       }
 
       return res.text();
-    }).then(text => commit('RAW_OK', { url, text }));
+    }).then(text => commit('RAW_OK', { url, text }))
+    .catch(() => commit('RAW_ERROR', { url }));
+};
+
+export const getPageList = (commit) => {
+  commit('PAGELIST_LOADING');
+
+  fetch(getUrl('pages'))
+    .then((res) => {
+      if (res.status >= 400) {
+        throw commit('PAGELIST_ERROR');
+      }
+
+      return res.json();
+    }).then(json => commit('PAGELIST_OK', { json }))
+    .catch(() => commit('PAGELIST_ERROR'));
 };

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "marked": "^0.3.6",
     "postcss-cssnext": "^2.9.0",
     "postcss-import": "^9.1.0",
     "vue": "^2.1.0",

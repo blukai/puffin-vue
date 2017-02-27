@@ -56,10 +56,11 @@ export default {
           const viewing = this.posts.find(post => post.link === route);
 
           if (viewing) {
-            const metadata = this.raw[viewing.file] && this.raw[viewing.file].metadata;
+            const raw = this.raw[viewing.file];
+            const data = raw && raw.data && raw.data.image && raw.data;
 
             return {
-              ...metadata,
+              ...data,
               title: viewing.title
             };
           }

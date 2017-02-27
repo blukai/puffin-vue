@@ -1,0 +1,76 @@
+@import 'props';
+@import 'typography';
+@import 'colors';
+
+:root {
+  --codeBg: color(var(--backgroundInv) a(5%));
+}
+
+.compiledMarkdown {
+  @apply --centering;
+
+  max-width: 640px;
+
+  & pre {
+    white-space: pre-wrap;
+    padding: 16px;
+    background-color: var(--codeBg);
+    border-radius: 3px;
+
+    & > code {
+      background: none;
+    }
+  }
+
+  & code {
+    padding: 2px 0;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: var(--codeBg);
+    border-radius: 3px;
+  }
+
+  & blockquote {
+    color: var(--textColorSecondary);
+    border-left: 3px solid var(--textColorSecondary);
+    padding: 0 var(--indentMedium);
+  }
+
+  & img {
+    max-width: 100%;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-weight: var(--fontWeightMedium);
+    margin: 0;
+  }
+
+  & h1 {
+    font-size:32px
+  }
+
+  & h2 {
+    font-size:24px;
+  }
+
+  & h3 {
+    font-size:20px;
+  }
+
+  & h4 {
+    font-size:16px;
+    }
+
+  & h5 {
+    font-size:14px;
+  }
+
+  & h6 {
+    font-size:12px;
+  }
+}

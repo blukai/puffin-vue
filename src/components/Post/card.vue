@@ -79,8 +79,8 @@ export default {
     data() {
       const item = this.raw[this.post.file];
 
-      if (!item.loading && !item.error && item.metadata) {
-        return item.metadata;
+      if (!item.loading && !item.error && item.data) {
+        return item.data;
       }
 
       return item;

@@ -5,12 +5,13 @@
 
 header > section {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 
   & p {
-    padding: calc(var(--indent) * 1.2) 0;
+    padding-top: calc(var(--indent) * 1.2);
+    padding-bottom: 0;
     line-height: 1.2;
     margin: 0;
     text-align: center;
@@ -37,16 +38,21 @@ header > section {
       color: var(--textColorSecondary);
     }
 
-    @media (--medium-x) {
-      padding-bottom: var(--indentMedium);
-    }
-
     @media (--small-x) {
       padding-bottom: 0;
 
       & a {
         font-size: calc(var(--fontSizeHuge) / 1.4);
       }
+    }
+  }
+
+  & ul {
+    margin: var(--indentMedium) 0 0;
+    padding: 0;
+
+    & li {
+      list-style: none;
     }
   }
 }
@@ -59,11 +65,18 @@ header > section {
         <router-link to="/" exact>{{ author }}</router-link>
         <span v-if="subtitle">{{ subtitle }}</span>
       </p>
+      <ul v-if="!pages.loading && !pages.error && pages">
+        <li v-for="page in pages">
+          <router-link :to="`page/${page.link}`">{{ page.title }}</router-link>
+        </li>
+      </ul>
     </section>
   </header>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import { author, subtitle } from '../../config.json';
 
 export default {
@@ -72,6 +85,23 @@ export default {
       author,
       subtitle
     };
+  },
+
+  computed: {
+    ...mapGetters(['pages']),
+  },
+
+  methods: {
+    getPages() {
+      this.$store.dispatch('getPages');
+    }
+  },
+
+  created() {
+    const pages = this.pages;
+    if (!pages.loading && !pages.error && !pages.length) {
+      this.getPages();
+    }
   }
 };
 </script>

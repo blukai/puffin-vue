@@ -27,12 +27,16 @@ function merge(acc, item) {
 }
 
 export default (payload) => {
-  const text = payload.replace(mdMetadata, '');
+  if (mdMetadata.test(payload)) {
+    const text = payload.replace(mdMetadata, '');
 
-  return mdMetadata
-    .exec(payload)[1]
-    .split('\n')
-    .filter(nonEmpty)
-    .map(splitKeyValue)
-    .reduce(merge, text.length > 1 ? { text } : {});
+    return mdMetadata
+      .exec(payload)[1]
+      .split('\n')
+      .filter(nonEmpty)
+      .map(splitKeyValue)
+      .reduce(merge, text.length > 1 ? { text } : {});
+  }
+
+  return payload;
 };

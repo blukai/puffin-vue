@@ -11,7 +11,7 @@ article {
 
     display: block;
     margin-bottom: var(--indent);
-    max-width: 100vw;
+    max-width: 100%;
   }
 
   & > ul {
@@ -103,7 +103,7 @@ export default {
 
   computed: {
     imageUrl() {
-      return getImgUrl(this.raw.image);
+      return this.raw.image && getImgUrl(this.raw.image);
     },
 
     headerHeight() {
