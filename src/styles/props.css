@@ -6,7 +6,6 @@
 
   --indent: 20px;
   --indentMedium: 10px;
-  --indentSmall: 5px;
 
   --centering: {
     margin-left: auto;
@@ -26,8 +25,8 @@
     }
 
     @media (--small-x) {
-      padding-left: var(--indentSmall);
-      padding-right: var(--indentSmall);
+      padding-left: 0;
+      padding-right: 0;
     }
   };
 

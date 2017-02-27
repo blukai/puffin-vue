@@ -11,7 +11,7 @@ article {
 
     display: block;
     margin-bottom: var(--indent);
-    max-width: calc(100vw - 10px);
+    max-width: 100vw;
   }
 
   & > ul {
@@ -24,14 +24,6 @@ article {
       padding: var(--indent);
       padding-bottom: 0;
 
-      &:last-child {
-        padding-right: 0;
-      }
-
-      &:first-child {
-        padding-left: 0;
-      }
-
       & span:first-child {
         font-weight: var(--fontWeightLight);
         font-size: var(--fontSizeSmall);
@@ -42,7 +34,7 @@ article {
 
   & > div {
     font-size: var(--fontSizeMedium);
-    padding-top: var(--indent);
+    padding: var(--indent);
   }
 
   & > h1 {
@@ -50,6 +42,34 @@ article {
     font-weight: var(--fontWeightNormal);
     margin: 0;
     line-height: 1.2;
+  }
+
+  @media (--medium-x) {
+    & h1 {
+      font-size: calc(var(--fontSizeHuge) - 15px);
+    }
+  }
+
+  @media (--small-x) {
+    & h1 {
+      font-size: calc(var(--fontSizeHuge) - 20px);
+    }
+
+    & ul > li {
+      padding: var(--indentMedium);
+      padding-bottom: 0;
+    }
+
+    & > div {
+      font-size: var(--fontSizeNormal);
+    }
+  }
+
+  @media (--tiny-x) {
+    & h1 {
+      font-size: var(--fontSizeLarge);
+      font-weight: var(--fontWeightMedium);
+    }
   }
 }
 </style>

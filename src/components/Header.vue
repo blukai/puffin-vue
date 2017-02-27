@@ -25,10 +25,6 @@ header > section {
         opacity: 0.7;
       }
 
-      @media (--small-x) {
-        font-size: calc(var(--fontSizeHuge) / 1.4);
-      }
-
       @media (--tiny-x) {
         font-size: calc(var(--fontSizeHuge) / 1.8);
       }
@@ -39,6 +35,18 @@ header > section {
       font-size: var(--fontSizeNormal);
       font-weight: var(--fontWeightLight);
       color: var(--textColorSecondary);
+    }
+
+    @media (--medium-x) {
+      padding-bottom: var(--indentMedium);
+    }
+
+    @media (--small-x) {
+      padding-bottom: 0;
+
+      & a {
+        font-size: calc(var(--fontSizeHuge) / 1.4);
+      }
     }
   }
 }

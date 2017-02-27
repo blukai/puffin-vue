@@ -53,10 +53,6 @@
     & > main {
       flex-grow: 1;
       order: 2;
-
-      & > div {
-        @apply --appContainer;
-      }
     }
 
     & > footer {
@@ -69,6 +65,16 @@
     & > footer {
       & > section {
         @apply --appContainer;
+      }
+    }
+
+    & > header,
+    & > footer {
+      & > section {
+        @media (--small-x) {
+          padding-left: var(--indentMedium);
+          padding-right: var(--indentMedium);
+        }
       }
     }
   }
