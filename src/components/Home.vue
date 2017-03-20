@@ -37,11 +37,11 @@ ul.sections {
 
     & a {
       padding: 0.2em 0.9em;
-      background-color: color(#ddeeff a(65%));
+      background-color: color(#def a(65%));
       border-radius: 3px;
 
       &.router-link-active {
-        background-color: #ddeeff;
+        background-color: #def;
       }
     }
   }
@@ -110,7 +110,7 @@ export default {
       const raw = this.raw;
 
       if (raw) {
-        const sections = Object.keys(raw).map(key => {
+        const sections = Object.keys(raw).map((key) => {
           const post = raw[key];
 
           if (post && post.data) {
@@ -122,11 +122,12 @@ export default {
 
         return [
           ...new Set(
-            [].concat.apply([],
-            sections.map(sec => sec && sec
-              .split(',')
-              .map(item => item.trim())
-            )).filter(Boolean)
+            [].concat(
+              ...sections.map(sec => sec && sec
+                .split(',')
+                .map(item => item.trim())
+              )
+            ).filter(Boolean)
           )
         ];
       }
@@ -140,7 +141,7 @@ export default {
       const raw = this.raw;
 
       if (!posts.loading && !posts.error && posts.length && hash && raw) {
-        const hashed = Object.keys(raw).map(key => {
+        const hashed = Object.keys(raw).map((key) => {
           const post = raw[key];
 
           if (post.data && post.data.section) {
