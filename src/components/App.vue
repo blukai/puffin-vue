@@ -23,6 +23,8 @@
     color: var(--textColorPrimary);
     background-color: var(--background);
     line-height: var(--lineHeight);
+    overflow-y: scroll;
+    overflow-x: none;
   }
 
   & a {

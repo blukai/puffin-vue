@@ -48,11 +48,20 @@ header > section {
   }
 
   & ul {
-    margin: var(--indentMedium) 0 0;
+    margin: var(--indent) 0 0;
     padding: 0;
+    font-size: var(--fontSizeMedium);
+    text-align: center;
 
     & li {
       list-style: none;
+      display: inline-block;
+      padding-left: var(--indentMedium);
+      padding-right: var(--indentMedium);
+
+      & a.router-link-active {
+        color: var(--textColorSecondary);
+      }
     }
   }
 }
@@ -67,7 +76,7 @@ header > section {
       </p>
       <ul v-if="!pages.loading && !pages.error && pages">
         <li v-for="page in pages">
-          <router-link :to="`page/${page.link}`">{{ page.title }}</router-link>
+          <router-link :to="`/page/${page.link}`">{{ page.title }}</router-link>
         </li>
       </ul>
     </section>

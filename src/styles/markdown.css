@@ -10,6 +10,9 @@
   @apply --centering;
 
   max-width: 640px;
+  font-size: var(--fontSizeMedium);
+  padding-left: var(--indent);
+  padding-right: var(--indent);
 
   & pre {
     white-space: pre-wrap;
@@ -72,5 +75,11 @@
 
   & h6 {
     font-size: 12px;
+  }
+
+  @media (--small-x) {
+    font-size: var(--fontSizeNormal);
+    padding-left: var(--indentMedium);
+    padding-right: var(--indentMedium);
   }
 }
