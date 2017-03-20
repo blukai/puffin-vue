@@ -14,7 +14,7 @@ Vue.component('Error', Error);
 sync(store, router);
 
 /* eslint-disable no-new */
-new Vue({
+window.App = new Vue({
   el: '#app',
   store,
   router,

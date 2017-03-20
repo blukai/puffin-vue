@@ -119,6 +119,7 @@ export default {
       delete raw.image;
       delete raw.text;
       delete raw.title;
+      delete raw.section;
 
       return raw;
     }

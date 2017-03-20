@@ -58,10 +58,10 @@ header > section {
       display: inline-block;
       padding-left: var(--indentMedium);
       padding-right: var(--indentMedium);
+    }
 
-      & a.router-link-active {
-        color: var(--textColorSecondary);
-      }
+    @media (--small-x) {
+      font-size: var(--fontSizeNormal);
     }
   }
 }

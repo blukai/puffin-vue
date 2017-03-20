@@ -7,6 +7,6 @@
   --textColorSecondary: color(var(--textColorPrimary) a(70%));
 
   /* links */
-  --linkColor: blue;
+  --linkColor: #0366d6;
   --linkColorHov: var(--textColorPrimary);
 }

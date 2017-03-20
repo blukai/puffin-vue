@@ -35,6 +35,10 @@
       color: var(--linkColorHov);
     }
 
+    &.router-link-active {
+      color: var(--textColorSecondary);
+    }
+
     & * {
       @apply --transitionBackground;
     }

@@ -1,7 +1,13 @@
 <style scoped>
 @import 'props';
 
-ul {
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul:not(.sections) {
   margin: 0;
   padding: 0;
   line-height: 0;
@@ -16,6 +22,30 @@ ul {
     column-gap: var(--indentMedium);
   }
 }
+
+ul.sections {
+  padding: 0;
+  margin: 0;
+  margin-bottom: var(--indent);
+
+  & li {
+    list-style: none;
+    display: inline-block;
+    text-align: center;
+    padding: var(--indentMedium);
+    text-transform: lowercase;
+
+    & a {
+      padding: 0.2em 0.9em;
+      background-color: color(#ddeeff a(65%));
+      border-radius: 3px;
+
+      &.router-link-active {
+        background-color: #ddeeff;
+      }
+    }
+  }
+}
 </style>
 
 <template>
@@ -23,9 +53,16 @@ ul {
     <div v-show="!view">
       <Loading v-if="posts.loading" />
       <Error v-else-if="posts.error" />
-      <ul v-else>
-        <Card v-for="post in posts" :post="post" />
-      </ul>
+      <div v-else class="home">
+        <ul class="sections">
+          <li v-for="section in sections">
+            <router-link :to="`#${section}`">{{ section }}</router-link>
+          </li>
+        </ul>
+        <ul>
+          <Card v-for="post in displayPosts" :post="post" />
+        </ul>
+      </div>
     </div>
     <Preview v-if="view" :raw="view" />
   </section>
@@ -58,7 +95,6 @@ export default {
           if (viewing) {
             const raw = this.raw[viewing.file];
             const data = raw && raw.data && raw.data.image && raw.data;
-
             return {
               ...data,
               title: viewing.title
@@ -68,6 +104,56 @@ export default {
       }
 
       return null;
+    },
+
+    sections() {
+      const raw = this.raw;
+
+      if (raw) {
+        const sections = Object.keys(raw).map(key => {
+          const post = raw[key];
+
+          if (post && post.data) {
+            return post.data.section || null;
+          }
+
+          return null;
+        });
+
+        return [
+          ...new Set(
+            [].concat.apply([],
+            sections.map(sec => sec && sec
+              .split(',')
+              .map(item => item.trim())
+            )).filter(Boolean)
+          )
+        ];
+      }
+
+      return null;
+    },
+
+    displayPosts() {
+      const hash = this.$route.hash.replace('#', '');
+      const posts = this.posts;
+      const raw = this.raw;
+
+      if (!posts.loading && !posts.error && posts.length && hash && raw) {
+        const hashed = Object.keys(raw).map(key => {
+          const post = raw[key];
+
+          if (post.data && post.data.section) {
+            return post.data.section.includes(hash) && key;
+          }
+
+          return null;
+        }).filter(Boolean);
+
+        return posts.filter(post => hashed.includes(post.file) && post);
+      }
+
+      return posts;
     }
   },
 
