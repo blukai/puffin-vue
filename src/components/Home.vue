@@ -136,22 +136,25 @@ export default {
     },
 
     displayPosts() {
-      const hash = this.$route.hash.replace('#', '');
       const posts = this.posts;
       const raw = this.raw;
 
-      if (!posts.loading && !posts.error && posts.length && hash && raw) {
+      if (raw) {
         const hashed = Object.keys(raw).map((key) => {
           const post = raw[key];
 
           if (post.data && post.data.section) {
-            return post.data.section.includes(hash) && key;
+            return post.data.section.includes(this.$route.hash.replace('#', '')) && key;
           }
 
           return null;
         }).filter(Boolean);
 
-        return posts.filter(post => hashed.includes(post.file) && post);
+        if (hashed && hashed.length) {
+          return posts.filter(post => hashed.includes(post.file) && post);
+        }
+
+        return posts;
       }
 
       return posts;
