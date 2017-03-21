@@ -7,9 +7,12 @@
   align-items: center;
 }
 
-ul:not(.sections) {
+ul {
   margin: 0;
   padding: 0;
+}
+
+ul.works {
   line-height: 0;
   column-count: 3;
   column-gap: calc(var(--indent) * 1.5);
@@ -24,8 +27,6 @@ ul:not(.sections) {
 }
 
 ul.sections {
-  padding: 0;
-  margin: 0;
   margin-bottom: var(--indent);
 
   & li {
@@ -33,6 +34,7 @@ ul.sections {
     display: inline-block;
     text-align: center;
     padding: var(--indentMedium);
+    padding-top: 0;
     text-transform: lowercase;
 
     & a {
@@ -59,7 +61,7 @@ ul.sections {
             <router-link :to="`#${section}`">{{ section }}</router-link>
           </li>
         </ul>
-        <ul>
+        <ul class="works">
           <Card v-for="post in displayPosts" :post="post" />
         </ul>
       </div>

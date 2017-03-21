@@ -3,82 +3,182 @@
 @import 'props';
 @import 'colors';
 
-header > section {
+:root {
+  --height: 75px;
+  --heightSubtitled: 96px;
+}
+
+header > section > div {
+  border-bottom: 6px solid black;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: var(--height);
+  position: relative;
 
-  & p {
-    padding-top: calc(var(--indent) * 1.2);
-    padding-bottom: 0;
-    line-height: 1.2;
-    margin: 0;
-    text-align: center;
+  &.subtitled {
+    height: var(--heightSubtitled);
+  }
 
-    & > a {
-      @apply --transitionOpacity;
+  & > main,
+  & > nav {
+    padding: var(--indent) 0;
+  }
 
-      font-size: var(--fontSizeHuge);
+  & > main {
+    & a {
+      font-size: var(--fontSizeLarge);
+      font-weight: 700;
+      text-transform: uppercase;
       color: var(--textColorPrimary);
-
-      &:hover {
-        opacity: 0.7;
-      }
-
-      @media (--tiny-x) {
-        font-size: calc(var(--fontSizeHuge) / 1.8);
-      }
     }
 
-    & > span {
+    & span {
       display: block;
-      font-size: var(--fontSizeNormal);
-      font-weight: var(--fontWeightLight);
       color: var(--textColorSecondary);
     }
+  }
 
-    @media (--small-x) {
-      padding-bottom: 0;
+  & > nav {
+    text-align: center;
 
-      & a {
-        font-size: calc(var(--fontSizeHuge) / 1.4);
+    & ul {
+      margin: 0;
+      padding: 0;
+
+      & li {
+        list-style: none;
+      }
+
+      &.hamburger {
+        display: none;
+      }
+
+      &.pages {
+        & li {
+          display: inline-block;
+          padding: 0;
+          margin-left: var(--indent);
+          
+          & a {
+            color: var(--textColorSecondary);
+
+            &:hover {
+              color: var(--linkColor);
+            }
+
+            &.router-link-active {
+              color: var(--linkColor);
+            }
+          }
+        }
+      }
+
+      @media (--medium-x) {
+        &.hamburger {
+          display: block;
+          width: 24px;
+          height: 15px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          font-size: var(--fontSizeMedium);
+
+          & li {
+            height: 3px;
+            width: 24px;
+            background: var(--textColorPrimary);
+            transition: transform 0.1s ease-in;
+          }
+
+          &.open {
+            & li {
+              &:first-child {
+                transform: translate3d(0, 6px, 0) rotate(45deg);
+              }
+
+              &:last-child {
+                transform: translate3d(0, -6px, 0) rotate(-45deg);
+              }
+            }
+          }
+        }
+
+        &.pages {
+          display: none;
+          position: absolute;
+          left: -var(--indentMedium);
+          top: var(--height);
+          background: var(--background);
+          width: calc(100% + (var(--indentMedium) * 2));
+          height: 100vh;
+          padding-top: var(--indentMedium);
+
+          & li {
+            margin: 0;
+            display: list-item;
+            padding: var(--indentMedium);
+            line-height: 1;
+            color: var(--textColorPrimary);
+            font-weight: var(--fontWeightMedium);
+          }
+
+          &.subtitled {
+            top: var(--heightSubtitled);
+          }
+
+          &.open {
+            display: block;
+          }
+        }
       }
     }
   }
 
-  & ul {
-    margin: var(--indent) 0 0;
-    padding: 0;
-    font-size: var(--fontSizeMedium);
-    text-align: center;
-
-    & li {
-      list-style: none;
-      display: inline-block;
-      padding-left: var(--indentMedium);
-      padding-right: var(--indentMedium);
-    }
-
-    @media (--small-x) {
-      font-size: var(--fontSizeNormal);
-    }
+  @media (--medium-x) {
+    align-items: center;
   }
 }
+
 </style>
 
 <template>
   <header>
     <section>
-      <p>
-        <router-link to="/" exact>{{ author }}</router-link>
-        <span v-if="subtitle">{{ subtitle }}</span>
-      </p>
-      <ul v-if="!pages.loading && !pages.error && pages">
-        <li v-for="page in pages">
-          <router-link :to="`/page/${page.link}`">{{ page.title }}</router-link>
-        </li>
-      </ul>
+      <div :class="isSubtitled && 'subtitled'">
+        <main @click="closeMenu">
+          <router-link to="/" exact>{{ author }}</router-link>
+          <span v-if="subtitle">{{ subtitle }}</span>
+        </main>
+        <nav>
+          <ul
+            :class="`
+              hamburger
+              ${isOpen ? 'open' : ''}
+            `"
+            @click="toggleMenu"
+          >
+            <li></li>
+            <li></li>
+          </ul>
+          <ul
+            :class="`
+              pages
+              ${isSubtitled ? 'subtitled' : ''}
+              ${isOpen ? 'open' : ''}
+            `"
+            v-if="!pages.loading && !pages.error && pages"
+          >
+            <li
+              v-for="page in pages"
+              @click="closeMenu"
+            >
+              <router-link :to="`/page/${page.link}`">{{ page.title }}</router-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </section>
   </header>
 </template>
@@ -92,22 +192,46 @@ export default {
   data() {
     return {
       author,
-      subtitle
+      subtitle,
+      isOpen: false
     };
   },
 
   computed: {
-    ...mapGetters(['pages'])
+    ...mapGetters(['pages']),
+
+    isSubtitled() {
+      if (subtitle) {
+        return true;
+      }
+
+      return false;
+    }
   },
 
   methods: {
     getPages() {
       this.$store.dispatch('getPages');
+    },
+
+    toggleMenu() {
+      this.isOpen = !this.isOpen;
+
+      if (this.isOpen) {
+        return document.body.style.overflow = 'hidden';
+      }
+
+      return document.body.style.overflow = 'scroll';
+    },
+
+    closeMenu() {
+      this.isOpen = false;
     }
   },
 
   created() {
     const pages = this.pages;
+
     if (!pages.loading && !pages.error && !pages.length) {
       this.getPages();
     }

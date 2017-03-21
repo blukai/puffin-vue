@@ -9,10 +9,7 @@
 .compiledMarkdown {
   @apply --centering;
 
-  max-width: 640px;
   font-size: var(--fontSizeMedium);
-  padding-left: var(--indent);
-  padding-right: var(--indent);
 
   & pre {
     white-space: pre-wrap;

@@ -24,12 +24,13 @@
     background-color: var(--background);
     line-height: var(--lineHeight);
     overflow-y: scroll;
-    overflow-x: none;
+    overflow-x: hidden;
   }
 
   & a {
     color: var(--linkColor);
     text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     &:hover {
       color: var(--linkColorHov);
@@ -53,7 +54,7 @@
 
     & > header {
       order: 1;
-      padding-bottom: var(--indent);
+      padding-bottom: calc(var(--indent) * 1.5);
     }
 
     & > main {
