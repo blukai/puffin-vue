@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const atImport = require('postcss-import');
 const cssNext = require('postcss-cssnext');
@@ -7,12 +8,29 @@ function resolve(dir) {
   return path.resolve(__dirname, dir);
 }
 
-module.exports = {
+const isProd = process.env.NODE_ENV === 'production';
+
+function HashBundlePlugin() {}
+HashBundlePlugin.prototype.apply = (compiler) => {
+  compiler.plugin('done', (statsData) => {
+    const stats = statsData.toJson();
+
+    if (!stats.errors.length) {
+      const htmlFileName = 'index.html';
+      const htmlIn = fs.readFileSync(resolve(htmlFileName), 'utf8');
+      const htmlOut = htmlIn.replace('dist/bundle.js', `bundle.${stats.hash}.js`);
+
+      fs.writeFileSync(resolve(`dist/${htmlFileName}`), htmlOut);
+    }
+  });
+};
+
+const config = {
   entry: './src/main.js',
   output: {
-    path: resolve('build'),
-    publicPath: '/build/',
-    filename: 'bundle.js'
+    path: resolve('dist'),
+    publicPath: '/dist/',
+    filename: `bundle${isProd ? '.[hash]' : ''}.js`
   },
   resolve: {
     extensions: [
@@ -52,10 +70,10 @@ module.exports = {
   devtool: '#eval-source-map'
 };
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map';
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
+if (isProd) {
+  config.devtool = '#source-map';
+
+  config.plugins = (config.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -69,6 +87,9 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    new HashBundlePlugin()
   ]);
 }
+
+module.exports = config;

@@ -1,26 +1,21 @@
 #!/bin/bash
-
 set -e
 
 REPO=`git config remote.origin.url`
-# Use token for pushing below
-TOKENED=${REPO/github.com/$GH_TOKEN@github.com}
+TOKENED=${REPO/github.com/$GH_TOKEN@github.com} # Use token for pushing below
 
 git config --global user.name "Travis CI"
 git config --global user.email "travis@travis-ci.org"
 
 git clone --branch gh-pages $REPO deploy
 
-cp index.html 404.html
-
-rm -rf deploy/index.html deploy/404.html deploy/build
-
-mv -v build index.html 404.html deploy
+rm -rf deploy/!(\.git|\.*)
+cp dist/index.html dist/404.html
+cp -a dist/. deploy
 
 cd deploy
 
 git remote add upstream $TOKENED
-
 git add --all .
 
 if [ -n "$(git status --porcelain)" ];
