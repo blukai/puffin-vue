@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+shopt -s extglob
 
 REPO=`git config remote.origin.url`
 TOKENED=${REPO/github.com/$GH_TOKEN@github.com} # Use token for pushing below
