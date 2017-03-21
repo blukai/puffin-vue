@@ -62,7 +62,7 @@ ul.sections {
           </li>
         </ul>
         <ul class="works">
-          <Card v-for="post in displayPosts" :post="post" />
+          <Card v-for="(post, index) in displayPosts" :post="post" :key="index" />
         </ul>
       </div>
     </div>
