@@ -60,7 +60,7 @@ header > section > div {
           display: inline-block;
           padding: 0;
           margin-left: var(--indent);
-          
+
           & a {
             color: var(--textColorSecondary);
 
@@ -77,7 +77,6 @@ header > section > div {
 
       @media (--medium-x) {
         &.hamburger {
-          display: block;
           width: 24px;
           height: 15px;
           display: flex;
@@ -218,14 +217,16 @@ export default {
       this.isOpen = !this.isOpen;
 
       if (this.isOpen) {
-        return document.body.style.overflow = 'hidden';
+        return (document.body.style.overflow = 'hidden');
       }
 
-      return document.body.style.overflow = 'scroll';
+      return (document.body.style.overflow = 'scroll');
     },
 
     closeMenu() {
       this.isOpen = false;
+
+      return (document.body.style.overflow = 'scroll');
     }
   },
 
