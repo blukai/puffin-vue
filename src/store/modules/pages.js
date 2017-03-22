@@ -1,10 +1,9 @@
 import Vue from 'vue';
-
-import { getPostList as posts } from 'api';
-import { md, clean } from 'utility';
+import { dir } from 'api';
+import { md, clean, getUrl } from 'utility';
 
 const initialState = {
-  posts: {
+  pages: {
     loading: false,
     error: false,
     data: {}
@@ -12,28 +11,32 @@ const initialState = {
 };
 
 const actions = {
-  getPosts({ commit }) {
-    return posts(commit);
+  getPages({ commit }) {
+    return dir({
+      commit,
+      url: getUrl('pages'),
+      mutation: 'PAGES'
+    });
   }
 };
 
 const mutations = {
-  POSTLIST_LOADING(state) {
-    Vue.set(state, 'posts', {
+  PAGES_LOADING(state) {
+    Vue.set(state, 'pages', {
       loading: true,
       error: false,
       data: {}
     });
   },
-  POSTLIST_ERROR(state) {
-    Vue.set(state, 'posts', {
+  PAGES_ERROR(state) {
+    Vue.set(state, 'pages', {
       loading: false,
       error: true,
       data: {}
     });
   },
-  POSTLIST_OK(state, { json }) {
-    Vue.set(state, 'posts', {
+  PAGES_OK(state, { json }) {
+    Vue.set(state, 'pages', {
       loading: false,
       error: false,
       data: json
@@ -42,8 +45,8 @@ const mutations = {
 };
 
 const getters = {
-  posts(state) {
-    const p = state.posts;
+  pages(state) {
+    const p = state.pages;
 
     // Transformations
     if (!p.loading && !p.error && p.data.length > 0) {

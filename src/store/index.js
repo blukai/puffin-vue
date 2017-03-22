@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import postList from './modules/postList';
+import posts from './modules/posts';
 import raw from './modules/raw';
-import pageList from './modules/pageList';
+import pages from './modules/pages';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    postList,
+    posts,
     raw,
-    pageList
+    pages
   }
 });

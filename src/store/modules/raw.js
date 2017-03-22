@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-import { getRaw as raw } from 'api';
+import { raw } from 'api';
 import { objectize } from 'utility';
 
 const initialState = {

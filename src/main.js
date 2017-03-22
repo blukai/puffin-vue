@@ -10,7 +10,6 @@ import Error from 'components/States/error';
 Vue.component('Loading', Loading);
 Vue.component('Error', Error);
 
-/* eslint-disable no-new */
 window.App = new Vue({
   el: '#app',
   store,

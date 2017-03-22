@@ -11,4 +11,6 @@ export const clean = srt => srt
   .toLowerCase()
   .replace(/[/_| -]+/g, '-');
 
-export const getImgUrl = img => `//raw.githubusercontent.com/${github.user}/${github.repo}/content/content/images/${img}`;
+const { user, repo } = github;
+export const getImgUrl = img => `//raw.githubusercontent.com/${user}/${repo}/content/content/images/${img}`;
+export const getUrl = dir => `//api.github.com/repos/${user}/${repo}/contents/content/${dir}?ref=content`;
